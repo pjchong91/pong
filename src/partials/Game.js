@@ -1,6 +1,8 @@
 import Board from './Board';
 import Paddle from './Paddles';
+import Ball from './Ball';
 import { SVG_NS, KEYS } from '../settings';
+
 
 
 export default class Game {
@@ -36,6 +38,9 @@ export default class Game {
 				KEYS.up,
 				KEYS.down
 			);
+
+			this.ball = new Ball (10, this.width, this.height); //????? Why are we using width and height
+	
 		
 		// Other code goes here...
 
@@ -56,6 +61,7 @@ export default class Game {
 			this.board.render(svg);
 			this.player1.render(svg);
 			this.player2.render(svg);
+			this.ball.render(svg, this.player1,this.player2);
 	}
 
 }
