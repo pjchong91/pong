@@ -1,4 +1,5 @@
 import { SVG_NS } from '../settings';
+import Board from './Board';
 
 export default class Game {
 
@@ -9,6 +10,7 @@ export default class Game {
 	
 
 		this.gameElement = document.getElementById(this.element);
+		this.board = new Board(this.width, this.height);
 		// Other code goes here...
 	}
 
