@@ -1,5 +1,7 @@
-import { SVG_NS } from '../settings';
 import Board from './Board';
+import Paddle from './Paddles';
+import { SVG_NS, KEYS } from '../settings';
+
 
 export default class Game {
 
@@ -8,10 +10,37 @@ export default class Game {
 		this.width = width;
 		this.height = height;
 	
+		this.paddleWidth = 8;
+		this.paddleHeight = 56;
+		this.boardGap = 10;
 
 		this.gameElement = document.getElementById(this.element);
 		this.board = new Board(this.width, this.height);
+
+		this.player1 = new Paddle(
+			this.height,
+			this.paddleWidth,
+			this.paddleHeight,
+			this.boardGap,
+			((this.height - this.paddleHeight) / 2),
+			KEYS.a,
+			KEYS.z
+		);
+
+			this.player2 = new Paddle(
+				this.height,
+				this.paddleWidth,
+				this.paddleHeight,
+				(this.width - this.boardGap-this.paddleWidth),
+				((this.height - this.paddleHeight) / 2),
+				KEYS.up,
+				KEYS.down
+			);
+		
 		// Other code goes here...
+
+		// console.log(this.player1);
+		// console.log(this.player2);
 	}
 
 	render() {
@@ -20,10 +49,13 @@ export default class Game {
 		this.gameElement.innerHTML = '';
 
 		let svg = document.createElementNS(SVG_NS, "svg");
-			svg.setAttributeNS(null, "width", this.width);
-			svg.setAttributeNS(null, "height", this.height);
-			svg.setAttributeNS(null, "viewBox", `0 0 ${this.width} ${this.height}`);
+			svg.setAttributeNS(null, 'width', this.width);
+			svg.setAttributeNS(null, 'height', this.height);
+			svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
 			this.gameElement.appendChild(svg);
+			this.board.render(svg);
+			this.player1.render(svg);
+			this.player2.render(svg);
 	}
 
 }
