@@ -25,3 +25,6 @@ A basic pong game using SVGs.
 **Player 2:**
 * ▲ : up
 * ▼: down
+
+##Personal Learnings:
+- Yarn vs NPM : Yarn is a Facebook-equivalent to NPM.  They download the same modules but utilize different caching mechanisms
