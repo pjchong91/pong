@@ -8,7 +8,7 @@ constructor(boardHeight, width, height, x, y, up,down) {
       this.height = height;
       this.x = x;
       this.y = y;
-      this.speed = 10; //Move in increments of 10 pixels
+      this.speed = 20; //Move in increments of 10 pixels
       this.score = 0; //Default score = 0
 
 
@@ -25,11 +25,12 @@ constructor(boardHeight, width, height, x, y, up,down) {
 }
 
 up() {
-    this.y -= this.speed;
+   this.y=Math.max(0, (this.y-this.speed));
+
 }
 
 down(){
-    this.y += this.speed;
+    this.y = Math.min((this.boardHeight-this.height), (this.y+this.speed));
 
 }
             //...
