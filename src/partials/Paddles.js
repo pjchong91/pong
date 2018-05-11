@@ -2,7 +2,7 @@ import { SVG_NS } from '../settings';
 export default class Paddle { //Can also think of as "Player"
    
 
-constructor(boardHeight, width, height, x, y, up,down) {
+constructor(boardHeight, width, height, x, y, up,down,player) {
       this.boardHeight = boardHeight;
       this.width = width;
       this.height = height;
@@ -11,17 +11,28 @@ constructor(boardHeight, width, height, x, y, up,down) {
       this.speed = 20; //Move in increments of 10 pixels
       this.score = 0; //Default score = 0
 
+      this.player=player;
+      this.keyState={};
 
-      document.addEventListener('keydown', event => {
-        switch (event.key) {
-          case up:
-            this.up();
-            break;
-          case down:
-            this.down();
-            break;
-        }
-    })
+      document.addEventListener('keydown',event => {
+          this.keyState[event.key || event.which] = true;
+      }, true); //key down has value of true
+
+      document.addEventListener('keyup',event => {
+        this.keyState[event.key || event.which] = false;
+    }, true);
+      
+
+    //   document.addEventListener('keydown', event => {
+    //     switch (event.key) {
+    //       case up:
+    //         this.up();
+    //         break;
+    //       case down:
+    //         this.down();
+    //         break;
+    //     }
+    // })
 }
 
 
@@ -49,6 +60,18 @@ coordinates(x, y, width, height) {
             //...
 
     render(svg) {
+        if(this.keyState['a'] && this.player === 'player1') {
+            this.up();
+        }
+        if(this.keyState['z'] && this.player === 'player1') {
+            this.down();
+        }
+        if(this.keyState['ArrowUp'] && this.player === 'player2') {
+            this.up();
+        }
+        if(this.keyState['ArrowDown'] && this.player === 'player2') {
+            this.down();
+        }
         let rect = document.createElementNS(SVG_NS, 'rect');
             rect.setAttributeNS(null, 'width', this.width);
             rect.setAttributeNS(null, 'height', this.height);
