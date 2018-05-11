@@ -40,7 +40,7 @@ export default class Game {
 				KEYS.down
 			);
 
-			this.ball = new Ball (10, this.width, this.height, (this.width/2), (this.height/2)); //????? Why are we using width and height
+			this.ball = new Ball (10, this.width, this.height); //????? Why are we using width and height
 	
 		
 		// Other code goes here...
