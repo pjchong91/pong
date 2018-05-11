@@ -5,18 +5,31 @@ export default class Ball {
       this.radius = radius;
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
-      this.direction = 1;//(-1) will reverse - multiply to get direction
+      this.direction = 10;//(-1) will reverse - multiply to get direction
       this.x = x;
       this.y= y;
 
       document.addEventListener('click', event => {
-     console.log('aiya');
+          this.moveFatGurl();
+   
+   
+ 
+    // this.x+=this.direction;
+    // console.log(this.x);
       });
     
     }
     reset() {
       this.x = this.boardWidth / 2;
       this.y = this.boardHeight / 2;
+    }
+
+    moveFatGurl(){
+        setInterval(()=>{
+       this.x+=this.direction;
+       console.log(this.x);
+      },500);
+
     }
     
 
