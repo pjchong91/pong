@@ -61,24 +61,27 @@ export default class Ball {
   
       paddleCollision(player1, player2) {
         if (this.vx > 0) {
-          //...
-          let paddle=player2.coordinates(player2.x,player2.y, player2.width,player2.height); //returns an array
-          let [leftX,rightX,topY,bottomY] = paddle; //array destructuring
+          let paddle2=player2.coordinates(player2.x,player2.y, player2.width,player2.height); //returns an array
+          let [leftX,rightX,topY,bottomY] = paddle2; //array destructuring
         
           //Right edge of ball is >= left edge of the paddle for Player2
           if ((this.x+this.radius >= leftX) && 
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-              }
+              } 
         } else {
-          //...
+          let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
+          let [leftX,rightX,topY,bottomY] = paddle1; //array destructuring
+          
+          if ((this.x-this.radius <= rightX) && 
+             (this.x-this.radius >= leftX) && 
+             (this.y >=topY && this.y <=bottomY)){
+                this.vx *= (-1);
+                }
+          }
         }
-      }
-    
-
-   
-    
+          
 
   render(svg, player1, player2) {
 
