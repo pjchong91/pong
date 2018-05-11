@@ -7,18 +7,30 @@ import { SVG_NS, KEYS } from '../settings';
 
 export default class Game {
 
-	constructor(element, width, height) {
+	constructor(element, width, height, spaceBar) {
 		this.element = element;
 		this.width = width;
 		this.height = height;
+		KEYS.spaceBar;
 	
 		this.paddleWidth = 8;
 		this.paddleHeight = 56;
 		this.boardGap = 10;
 
+		this.pause = false;
+
+		document.addEventListener('keydown', event => {
+			if(event.key === KEYS.spaceBar) {
+					this.pause = !this.pause;
+					console.log(this.pause);
+			
+			}});
+
 
 		this.gameElement = document.getElementById(this.element);
 		this.board = new Board(this.width, this.height);
+
+
 
 		this.player1 = new Paddle(
 			this.height,
@@ -40,8 +52,8 @@ export default class Game {
 				KEYS.down
 			);
 
-			this.ball = new Ball (10, this.width, this.height); //????? Why are we using width and height
-	
+			this.ballA = new Ball (10, this.width, this.height); //????? Why are we using width and height
+			this.ballB = new Ball (5, this.width, this.height); //????? Why are we using width and height
 		
 		// Other code goes here...
 
@@ -51,7 +63,9 @@ export default class Game {
 	
 	render() {
 		// More code goes here...
-
+		if (this.pause === true){
+			return;
+		} else {
 		this.gameElement.innerHTML = '';
 
 		let svg = document.createElementNS(SVG_NS, 'svg');
@@ -62,8 +76,10 @@ export default class Game {
 			this.board.render(svg);
 			this.player1.render(svg);
 			this.player2.render(svg);
-			this.ball.render(svg, this.player1,this.player2);
-		
+			this.ballA.render(svg, this.player1,this.player2);
+			this.ballB.render(svg, this.player1,this.player2);
+			
+		}
 		
 	}
 
