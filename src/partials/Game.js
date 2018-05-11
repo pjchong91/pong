@@ -1,6 +1,7 @@
 import Board from './Board';
 import Paddle from './Paddles';
 import Ball from './Ball';
+import Bomb from './Bomb';
 import Score from './Score';
 import { SVG_NS, KEYS } from '../settings';
 
@@ -44,7 +45,8 @@ export default class Game {
 			this.boardGap,
 			((this.height - this.paddleHeight) / 2),
 			KEYS.a,
-			KEYS.z
+			KEYS.z,
+			
 		);
 
 			this.player2 = new Paddle(
@@ -55,10 +57,15 @@ export default class Game {
 				((this.height - this.paddleHeight) / 2),
 				KEYS.up,
 				KEYS.down
+
+				
+		
 			);
 
 			this.ballA = new Ball (10, this.width, this.height); //????? Why are we using width and height
 			this.ballB = new Ball (5, this.width, this.height); //????? Why are we using width and height
+
+			this.bomb = new Bomb (15, this.width, this.height); //????? Why are we using width and height
 		
 
 		// Other code goes here...
@@ -72,7 +79,12 @@ export default class Game {
 		if (this.pause === true){
 			return;
 		} else {
+
 		this.gameElement.innerHTML = '';
+
+		// console.log(this.player1.score);
+	
+
 
 		let svg = document.createElementNS(SVG_NS, 'svg');
 			svg.setAttributeNS(null, 'width', this.width);
@@ -84,11 +96,17 @@ export default class Game {
 			this.player2.render(svg);
 			this.ballA.render(svg, this.player1,this.player2);
 			this.ballB.render(svg, this.player1,this.player2);
+			this.bomb.render(svg, this.player1, this.player2);
 			this.score1.render(svg,this.player1.score);
 			this.score2.render(svg,this.player2.score);
 			
 		}
 		
+		// if (this.player1.score>this.player2.score){
+		// 	this.player1.paddleHeight=10;
+		// 	console.log(this.player1.paddleHeight);
+		// }
+
 	}
 
 }

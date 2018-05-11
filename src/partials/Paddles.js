@@ -24,6 +24,8 @@ constructor(boardHeight, width, height, x, y, up,down) {
     })
 }
 
+
+
 up() {
    this.y=Math.max(0, (this.y-this.speed));
 
@@ -43,7 +45,7 @@ coordinates(x, y, width, height) {
     return [leftX, rightX, topY, bottomY];
   }
 
-  
+
             //...
 
     render(svg) {
