@@ -8,6 +8,7 @@ export default class Ball {
       this.direction = 1;//(-1) will reverse - multiply to get direction
       // this.x = x;
       // this.y= y;
+      this.ping = new Audio("public/sounds/pong-01.wav");
       this.reset();
 
       // let vy = Math.floor((Math.random() * 10) - 5);
@@ -21,15 +22,12 @@ export default class Ball {
       // });
     
     }
-    reset() {
-   
-      this.x = this.boardWidth / 2;
-      this.y = this.boardHeight / 2;
 
-      this.vy=0;
-      while (this.vy === 0){
-        this.vy = Math.floor(Math.random() * 10 - 5);}
-        this.vx = this.direction * (6 - Math.abs(this.vy));
+
+    goal(player) {
+      this.reset();
+      player.score++;
+      console.log(player.score);
     }
 
     // moveFatGurl(){
@@ -51,11 +49,32 @@ export default class Ball {
 
       if (hitLeft === true || hitRight === true){
         this.vx *= (-1);
-      }
+        // this.goal();
+        // if (hitLeft === true){
+        //   console.log('player 2 gets a point');}
+        //   if (hitRight === true){
+        //     console.log('player 1 gets a point')
+        //   }
+        }
+
+        
+        
+      
 
       if (hitTop === true || hitBottom === true){
         this.vy *= (-1);
       }
+    }
+
+    reset() {
+   
+      this.x = this.boardWidth / 2;
+      this.y = this.boardHeight / 2;
+
+      this.vy=0;
+      while (this.vy === 0){
+        this.vy = Math.floor(Math.random() * 10 - 5);}
+        this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
   
@@ -69,6 +88,7 @@ export default class Ball {
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
+                this.ping.play();
               } 
         } else {
           let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
@@ -78,6 +98,7 @@ export default class Ball {
              (this.x-this.radius >= leftX) && 
              (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
+                this.ping.play();
                 }
           }
         }
@@ -97,6 +118,19 @@ export default class Ball {
         circle.setAttributeNS(null, 'cx', this.x);
         circle.setAttributeNS(null, 'cy', this.y);
 
+        const rightGoal = this.x+this.radius >= this.boardWidth;
+        const leftGoal = this.x-this.radius <=0;
+
+      if (rightGoal){
+        this.goal(player1);
+        this.direction = -1;
+      } else if (leftGoal){
+        this.goal(player2);
+        this.direction= 1;
+      }
+    
+
+    
     svg.appendChild(circle);
-}
+    }
 }
