@@ -2,6 +2,7 @@ import Board from './Board';
 import Paddle from './Paddles';
 import Ball from './Ball';
 import Bomb from './Bomb';
+import BuffBall from './BuffBall'
 import Score from './Score';
 import { SVG_NS, KEYS } from '../settings';
 
@@ -63,8 +64,8 @@ export default class Game {
 			this.ballA = new Ball (10, this.width, this.height); //????? Why are we using width and height
 			this.ballB = new Ball (5, this.width, this.height); //????? Why are we using width and height
 
-			this.bomb = new Bomb (15, this.width, this.height); //????? Why are we using width and height
-
+			this.bomb = new Bomb (10, this.width, this.height); //????? Why are we using width and height
+			this.buff = new BuffBall (10, this.width, this.height); //????? Why are we using width and height
 	}
 
 	sizePaddle(){
@@ -100,6 +101,7 @@ export default class Game {
 			this.ballA.render(svg, this.player1,this.player2);
 			this.ballB.render(svg, this.player1,this.player2);
 			this.bomb.render(svg, this.player1, this.player2);
+			this.buff.render(svg,this.player1,this.player2);
 			this.score1.render(svg,this.player1.score);
 			this.score2.render(svg,this.player2.score);
 			this.sizePaddle(svg, this.player1, this.player2);

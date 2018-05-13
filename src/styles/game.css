@@ -84,3 +84,67 @@ h1 {
   margin-bottom: 1rem; 
   text-align: center;
 }
+
+.realH1{
+  display: none;
+}
+
+.fakeStart{
+  height: 256px;
+  width: 512px;
+  background-color: #353535;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fakeStart h1{
+  color: white;
+  margin-top: 20px;
+}
+
+.fakeStart select {
+  font-family: 'Silkscreen Web', monotype;
+  background-color: #353535;
+  border-color: #353535;
+  overflow-y: hidden;
+  margin-top: auto;
+  color: white;
+
+}
+
+.fakeStart option:focus {
+  content: '\f0da';
+  font-family: FontAwesome;
+}
+
+.fakeStart option {
+line-height: 2.0;
+}
+
+.credits{
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 0.8rem;
+}
+
+p{
+  line-height: 1.5;
+}
+
+/* .startMenu option:before{
+  /* font-family: 'Silkscreen Web', monotype; 
+  content: '\f0da';
+  font-family: FontAwesome;
+  display: inline-block;
+} */
+
+
+
+
+/* .startMenu select{
+  display: none;
+} */
