@@ -5,38 +5,66 @@
 		<title>Pong</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
+
 	<body>
 		<div class="game-wrapper">
 			<h1 id="realH1" class="realH1">Pong</h1>
-			<div id="game"></div>
-			<div id="titleScreen" class="fakeStart">
-					<h1 class="fakeH1">Pong</h1>
-						<select id="startMenu" size=3 autofocus>
-							<option value="start" selected="selected" >Start</option>
-							<option value="playerControls">Player Controls</option>
-							<option value="rules">Rules</option>
-						</select>
-	
 
+			<!-- Real game loads from this div -->
+			<div id="game"></div> 
+
+
+			<!-- Fake start screen loads from this div -->
+			<div id="titleScreen" class="fakeStart">
+				<h1 class="fakeH1">Pong</h1>
+					<select id="startMenu" size=3 autofocus>
+						<option value="start" selected="selected" >Start</option>
+						<option value="playerControls">Player Controls</option>
+						<option value="rules">Rules</option>
+					</select>
+	
 				<div class="credits">
 					<p>© RED Academy 2018</p>
 					<p>© P Chong 2018</p>
-				</div>
-				
+				</div>                                        	 
+			</div> <!-- End of titleScreen -->
+			
+			<!-- Controls 'screen' -->
+			<div id="controls" class="controls"> 
+				<div class="textContainer">
+					<h1>Controls</h1>
+					
+					<div class="player1">
+						<h2>Player 1</h2>
+						<p>a: up</p>
+						<p>z: down</p>
+					</div>
+						
+					<div class="player2">
+						<h2>Player 2</h2>
+						<p class="up"> : up </p>
+						<p class="down"> : down </p>
+					</div>
+
+					<div class="goBack">
+						<p>Back to Start</p> <!--Not accessible.... <Speak but don't show>Press enter to go back'-->
+					</div>
+				</div> <!--End of textContainer-->
+			</div> <!--End of controls-->
+
+			<!-- Rules 'screen' -->
+			<div id="rules" class="rules"> 
+				<div class="textContainer">
+					<h1>Rules</h1>
+					<ul>
+						<li>There are 2 white balls, 1 red ball, and 1 green ball</li>
+						<li>If you fail to return a white ball, the other player gets 1 point</li>
+						<li>Letting the green ball pass gives you a paddle buff</li>
+						<li>Hitting the red ball will shorten your paddle</li>
+						<li>Whoever hits 20 points first wins!</li>
+					</ul>
 			</div>
 
-			<!-- <div id="controls"> 
-				<h2>Controls</h2>
-			</div>
-
-			<div id="rules"> 
-				<h2>Rules</h2>
-			</div> -->
-
-			
-
-
-			
 			<!-- Rough-out your SVG mark-up here to start... -->
 		
 			
@@ -57,11 +85,7 @@
 			<!-- </svg> -->
 
 
-
-			
-			
-			
-		</div>
+		</div> <!--End of game-wrapper-->
 		<script type="text/javascript" src="build/bundle.js"></script>
 	</body>
 </html>
