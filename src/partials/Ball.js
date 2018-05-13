@@ -8,7 +8,7 @@ export default class Ball {
       this.direction = 1;//(-1) will reverse - multiply to get direction
       // this.x = x;
       // this.y= y;
-      this.ping = new Audio("public/sounds/pong-01.wav");
+      // this.ping = new Audio("public/sounds/pong-01.wav");
       this.reset();
 
       // let vy = Math.floor((Math.random() * 10) - 5);
@@ -27,7 +27,7 @@ export default class Ball {
     goal(player) {
       this.reset();
       player.score++;
-      console.log(player.score);
+      // console.log(player.score);
     }
 
     // moveFatGurl(){
@@ -88,7 +88,7 @@ export default class Ball {
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                this.ping.play();
+                // this.ping.play();
               } 
         } else {
           let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
@@ -98,7 +98,7 @@ export default class Ball {
              (this.x-this.radius >= leftX) && 
              (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                this.ping.play();
+                // this.ping.play();
                 }
           }
         }

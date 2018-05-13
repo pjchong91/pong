@@ -36,8 +36,6 @@ export default class Game {
 		this.gameElement = document.getElementById(this.element);
 		this.board = new Board(this.width, this.height);
 
-
-
 		this.player1 = new Paddle(
 			this.height,
 			this.paddleWidth,
@@ -58,22 +56,28 @@ export default class Game {
 				((this.height - this.paddleHeight) / 2),
 				KEYS.up,
 				KEYS.down,
-				'player2'
+				'player2',
 
-				
-		
 			);
 
 			this.ballA = new Ball (10, this.width, this.height); //????? Why are we using width and height
 			this.ballB = new Ball (5, this.width, this.height); //????? Why are we using width and height
 
 			this.bomb = new Bomb (15, this.width, this.height); //????? Why are we using width and height
-		
 
-		// Other code goes here...
+	}
 
-		// console.log(this.player1);
-		// console.log(this.player2);
+	sizePaddle(){
+		// console.log(this.player1.speed);
+		console.log(this.player1);
+		if (this.player1.score>this.player2.score){
+			this.player1.height=15;
+			this.player2.height=60;
+		}
+		if (this.player2.score>this.player1.score){
+			this.player2.height=15;
+			this.player1.height=60;
+		}
 	}
 	
 	render() {
@@ -83,9 +87,6 @@ export default class Game {
 		} else {
 
 		this.gameElement.innerHTML = '';
-
-		// console.log(this.player1.score);
-	
 
 
 		let svg = document.createElementNS(SVG_NS, 'svg');
@@ -101,14 +102,11 @@ export default class Game {
 			this.bomb.render(svg, this.player1, this.player2);
 			this.score1.render(svg,this.player1.score);
 			this.score2.render(svg,this.player2.score);
+			this.sizePaddle(svg, this.player1, this.player2);
 			
 		}
-		
-		// if (this.player1.score>this.player2.score){
-		// 	this.player1.paddleHeight=10;
-		// 	console.log(this.player1.paddleHeight);
-		// }
+
+		}
 
 	}
 
-}
