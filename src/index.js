@@ -5,27 +5,14 @@ import { KEYS } from './settings';
 // create a game instance
 const game = new Game('game', 512, 256);
 
-// game.render();
-
-// console.log('what is jesus');
 let startMenu = document.getElementById('startMenu');
 let selected = startMenu.options[startMenu.selectedIndex].value;
-// console.log(selected);
 
 let titleScreen = document.getElementById('titleScreen');
 
 let offStart = false; 
 let controls = document.getElementById('controls');
 let rules = document.getElementById('rules');
-
-//Press 'enter' off of start page to return to start
-// console.log(titleScreen);
-
-// let realH1 = document.getElementById('realH1');
-//             console.log(realH1);
-// startMenu.onsubmit = function() {
-//     console.log('what the pizza')
-// }
 
 document.addEventListener('keydown', event => {
     let selected = startMenu.options[startMenu.selectedIndex].value; //Somehow got the right variable but don't know how.
@@ -76,10 +63,3 @@ document.addEventListener('keydown', event => {
     
     }});
 
-// startMenu.options[startMenu.selected].addClass('hasArrow');
-// console.log(selected);
-
-// (function gameLoop() {
-//     game.render();
-//     requestAnimationFrame(gameLoop);
-// })();

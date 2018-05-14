@@ -83,24 +83,6 @@ export default class Game {
 		}
 	}
 
-	// applyBuffs() {
-	// 	this.player1.height = 56 + (5*this.player1.buffCount);
-	// 	this.player2.height = 56 + (5*this.player2.buffCount);
-	// }
-
-	// applyDebuffs() {
-	// 	this.player1.height = 56 - (5*this.player1.buffCount);
-	// 	this.player2.height = 56 - (5*this.player2.buffCount);
-
-	// 	if (this.player1.height < 10){
-	// 		this.player1.height = 10;
-	// 	}
-
-	// 	if (this.player2.height < 10){
-	// 		this.player2.height = 10;
-	// 	}
-	// }
-
 	applyBuffandDebuff(){
 		this.player1.height = 56 + (5*this.player1.buffCount)-(5*this.player1.debuffCount);
 		this.player2.height = 56 + (5*this.player2.buffCount) - (5*this.player2.debuffCount);
@@ -117,10 +99,35 @@ export default class Game {
 	}
 	
 	render() {
-		// More code goes here...
+
 		if (this.pause === true){
 			return;
-		} else {
+		}
+
+		if (this.player1.score===20){
+			let gameBox = document.getElementById('game');
+			gameBox.style.display="none";
+			let victoryScreen = document.getElementById('victory')
+			victoryScreen.style.display="flex";
+			let victoryAnnouncement = document.querySelector('.endGame p');
+			let textMessage = document.querySelector('.textMessage p')
+			textMessage.innerHTML = "Good game!"
+			victoryAnnouncement.innerHTML = "Victory to Player 1!!"
+
+			return;
+		}
+		
+		if (this.player2.score===20){
+			let gameBox = document.getElementById('game');
+			gameBox.style.display="none";
+			let victoryScreen = document.getElementById('victory')
+			victoryScreen.style.display="flex";
+			let victoryAnnouncement = document.querySelector('.endGame p');
+			let textMessage = document.querySelector('.textMessage p')
+			textMessage.innerHTML = "Good game!"
+			victoryAnnouncement.innerHTML = "Victory to Player 2!!"
+			return;
+		}
 
 		this.gameElement.innerHTML = '';
 
@@ -146,5 +153,5 @@ export default class Game {
 
 		}
 
-	}
+	
 
