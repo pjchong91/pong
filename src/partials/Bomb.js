@@ -13,9 +13,10 @@ export default class Bomb {
     }
 
 
-    debuff(player) {
+    debuffPlayer(player) {
       this.reset();
-      player.debuff++;
+      player.debuffCount++;
+
     }
 
 
@@ -56,7 +57,7 @@ export default class Bomb {
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                this.debuff(player2);
+                this.debuffPlayer(player2);
                 this.ping.play();
               } 
         } else {
@@ -67,7 +68,7 @@ export default class Bomb {
              (this.x-this.radius >= leftX) && 
              (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                this.debuff(player1)
+                this.debuffPlayer(player1)
                 this.ping.play();
                 }
           }

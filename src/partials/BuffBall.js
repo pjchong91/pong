@@ -23,12 +23,13 @@ export default class BuffBall {
 
       if (hitLeft === true || hitRight === true){
         this.vx *= (-1);
+      }
        
       if (hitTop === true || hitBottom === true){
         this.vy *= (-1);
       }
     }
-  }
+  
 
     reset() {
       this.x = this.boardWidth / 2;

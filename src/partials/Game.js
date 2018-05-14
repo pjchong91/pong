@@ -83,9 +83,37 @@ export default class Game {
 		}
 	}
 
-	applyBuffs() {
-		this.player1.height = 56 + (5*this.player1.buffCount);
-		this.player2.height = 56 + (5*this.player2.buffCount);
+	// applyBuffs() {
+	// 	this.player1.height = 56 + (5*this.player1.buffCount);
+	// 	this.player2.height = 56 + (5*this.player2.buffCount);
+	// }
+
+	// applyDebuffs() {
+	// 	this.player1.height = 56 - (5*this.player1.buffCount);
+	// 	this.player2.height = 56 - (5*this.player2.buffCount);
+
+	// 	if (this.player1.height < 10){
+	// 		this.player1.height = 10;
+	// 	}
+
+	// 	if (this.player2.height < 10){
+	// 		this.player2.height = 10;
+	// 	}
+	// }
+
+	applyBuffandDebuff(){
+		this.player1.height = 56 + (5*this.player1.buffCount)-(5*this.player1.debuffCount);
+		this.player2.height = 56 + (5*this.player2.buffCount) - (5*this.player2.debuffCount);
+		if (this.player1.height <10) {
+			this.player1.height = 10
+		}
+
+		if (this.player2.height<10 ) {
+			this.player2.height = 10
+
+		}
+
+		console.log(this.player2.debuffCount, this.player1.buffCount, this.player2.height, )
 	}
 	
 	render() {
@@ -113,9 +141,7 @@ export default class Game {
 			this.score1.render(svg,this.player1.score);
 			this.score2.render(svg,this.player2.score);
 			this.sizePaddle(svg, this.player1, this.player2);
-			this.applyBuffs(svg, this.player1.buffCount, this.player2.buffCount);
-			// this.debuff(svg, this.player1, this.player2);
-			
+			this.applyBuffandDebuff(svg, this.player1, this.player2);
 		}
 
 		}
