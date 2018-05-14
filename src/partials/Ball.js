@@ -6,39 +6,15 @@ export default class Ball {
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
       this.direction = 1;//(-1) will reverse - multiply to get direction
-      // this.x = x;
-      // this.y= y;
-      // this.ping = new Audio("public/sounds/pong-01.wav");
+      this.ping = new Audio("public/sounds/pong-01.wav");
       this.reset();
-
-      // let vy = Math.floor((Math.random() * 10) - 5);
-      
-      // let vx = this.direction * (6 - Math.abs(vy));
-      // console.log(vy,vx);
-
-      // document.addEventListener('click', event => {
-      //     this.moveFatGurl();
-   
-      // });
-    
     }
 
 
     goal(player) {
       this.reset();
       player.score++;
-      // console.log(player.score);
     }
-
-    // moveFatGurl(){
-    //     setInterval(()=>{
-    //    this.x+=this.direction;
-    //    console.log(this.x);
-    //   },500);
-
-
-
-    // }
 
     wallCollision(){
       const hitLeft = this.x-this.radius <= 0; //returns a true or false
@@ -49,17 +25,7 @@ export default class Ball {
 
       if (hitLeft === true || hitRight === true){
         this.vx *= (-1);
-        // this.goal();
-        // if (hitLeft === true){
-        //   console.log('player 2 gets a point');}
-        //   if (hitRight === true){
-        //     console.log('player 1 gets a point')
-        //   }
         }
-
-        
-        
-      
 
       if (hitTop === true || hitBottom === true){
         this.vy *= (-1);
@@ -88,7 +54,7 @@ export default class Ball {
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                // this.ping.play();
+                this.ping.play();
               } 
         } else {
           let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
@@ -98,7 +64,7 @@ export default class Ball {
              (this.x-this.radius >= leftX) && 
              (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                // this.ping.play();
+                this.ping.play();
                 }
           }
         }

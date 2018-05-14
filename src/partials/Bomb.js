@@ -6,60 +6,28 @@ export default class Bomb {
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
       this.direction = 1;//(-1) will reverse - multiply to get direction
-      // this.x = x;
-      // this.y= y;
-    //   this.ping = new Audio("public/sounds/pong-01.wav");
+
+      this.ping = new Audio("public/sounds/pong-01.wav");
       this.reset();
-
-      // let vy = Math.floor((Math.random() * 10) - 5);
-      
-      // let vx = this.direction * (6 - Math.abs(vy));
-      // console.log(vy,vx);
-
-      // document.addEventListener('click', event => {
-      //     this.moveFatGurl();
-   
-      // });
     
     }
 
 
-    goal(player) {
+    debuff(player) {
       this.reset();
-      player.score--;
-    //   console.log(player.score);
+      player.debuff++;
     }
 
-    // moveFatGurl(){
-    //     setInterval(()=>{
-    //    this.x+=this.direction;
-    //    console.log(this.x);
-    //   },500);
-
-
-
-    // }
 
     wallCollision(){
       const hitLeft = this.x-this.radius <= 0; //returns a true or false
-      // console.log(hitLeft); //would show true
       const hitRight = this.x + this.radius >= this.boardWidth;
       const hitTop = this.y - this.radius <=0;
       const hitBottom = this.y + this.radius >= this.boardHeight;
 
       if (hitLeft === true || hitRight === true){
         this.vx *= (-1);
-        // this.goal();
-        // if (hitLeft === true){
-        //   console.log('player 2 gets a point');}
-        //   if (hitRight === true){
-        //     console.log('player 1 gets a point')
-        //   }
         }
-
-        
-        
-      
 
       if (hitTop === true || hitBottom === true){
         this.vy *= (-1);
@@ -88,7 +56,8 @@ export default class Bomb {
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                // this.ping.play();
+                this.debuff(player2);
+                this.ping.play();
               } 
         } else {
           let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
@@ -98,7 +67,8 @@ export default class Bomb {
              (this.x-this.radius >= leftX) && 
              (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                // this.ping.play();
+                this.debuff(player1)
+                this.ping.play();
                 }
           }
         }
@@ -118,17 +88,6 @@ export default class Bomb {
         circle.setAttributeNS(null, 'cx', this.x);
         circle.setAttributeNS(null, 'cy', this.y);
 
-        const leftGoal = this.x+this.radius >= this.boardWidth;
-        const rightGoal = this.x-this.radius <=0;
-
-      if (rightGoal){
-        this.goal(player1);
-        this.direction = -1;
-      } else if (leftGoal){
-        this.goal(player2);
-        this.direction= 1;
-      }
-    
 
     
     svg.appendChild(circle);

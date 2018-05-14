@@ -220,6 +220,12 @@ text-align: center;
     text-align: left;
   }
 
+  .textMessage{
+    display: none;
+    max-width: 512px;
+    text-align: center;
+  }
+
 /* .startMenu option:before{
   /* font-family: 'Silkscreen Web', monotype; 
   content: '\f0da';

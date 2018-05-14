@@ -6,8 +6,7 @@ import BuffBall from './BuffBall'
 import Score from './Score';
 import { SVG_NS, KEYS } from '../settings';
 
-
-
+let textMessage = document.querySelector('.textMessage p')
 export default class Game {
 
 	constructor(element, width, height, spaceBar) {
@@ -29,7 +28,6 @@ export default class Game {
 		document.addEventListener('keydown', event => {
 			if(event.key === KEYS.spaceBar) {
 					this.pause = !this.pause;
-					console.log(this.pause);
 			
 			}});
 
@@ -61,24 +59,33 @@ export default class Game {
 
 			);
 
-			this.ballA = new Ball (10, this.width, this.height); //????? Why are we using width and height
-			this.ballB = new Ball (5, this.width, this.height); //????? Why are we using width and height
+			this.ballA = new Ball (10, this.width, this.height); 
+			this.ballB = new Ball (5, this.width, this.height); 
 
-			this.bomb = new Bomb (10, this.width, this.height); //????? Why are we using width and height
-			this.buff = new BuffBall (10, this.width, this.height); //????? Why are we using width and height
+			this.bomb = new Bomb (10, this.width, this.height); 
+			this.buff = new BuffBall (10, this.width, this.height);
 	}
 
-	sizePaddle(){
-		// console.log(this.player1.speed);
-		console.log(this.player1);
-		if (this.player1.score>this.player2.score){
-			this.player1.height=15;
-			this.player2.height=60;
+
+
+	sizePaddle(){ //A player
+
+		if (this.player1.score>=this.player2.score+10){
+			this.player2.height = 60;
+			this.player1.height = 30;
+			textMessage.innerHTML = 'Alright. I think P2 needs some help and P1 needs more of a challenge!'
+
 		}
-		if (this.player2.score>this.player1.score){
-			this.player2.height=15;
-			this.player1.height=60;
+		if (this.player2.score>=this.player1.score+10){
+			this.player1.height = 60;
+			this.player2.height = 30;
+			textMessage.innerHTML = 'Alright. I think P1 needs some help and P2 needs more of a challenge!'
 		}
+	}
+
+	applyBuffs() {
+		this.player1.height = 56 + (5*this.player1.buffCount);
+		this.player2.height = 56 + (5*this.player2.buffCount);
 	}
 	
 	render() {
@@ -89,6 +96,7 @@ export default class Game {
 
 		this.gameElement.innerHTML = '';
 
+		let textMessage = document.querySelector('.textMessage p') //Returns textMessage div-p
 
 		let svg = document.createElementNS(SVG_NS, 'svg');
 			svg.setAttributeNS(null, 'width', this.width);
@@ -105,6 +113,8 @@ export default class Game {
 			this.score1.render(svg,this.player1.score);
 			this.score2.render(svg,this.player2.score);
 			this.sizePaddle(svg, this.player1, this.player2);
+			this.applyBuffs(svg, this.player1.buffCount, this.player2.buffCount);
+			// this.debuff(svg, this.player1, this.player2);
 			
 		}
 

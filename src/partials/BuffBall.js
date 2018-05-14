@@ -6,68 +6,31 @@ export default class BuffBall {
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
       this.direction = 1;//(-1) will reverse - multiply to get direction
-      // this.x = x;
-      // this.y= y;
-      // this.ping = new Audio("public/sounds/pong-01.wav");
+      this.ping = new Audio("public/sounds/pong-01.wav");
       this.reset();
-
-      // let vy = Math.floor((Math.random() * 10) - 5);
-      
-      // let vx = this.direction * (6 - Math.abs(vy));
-      // console.log(vy,vx);
-
-      // document.addEventListener('click', event => {
-      //     this.moveFatGurl();
-   
-      // });
-    
     }
 
-
-    goal(player) {
+    buffPlayer(player){
       this.reset();
-      player.score++;
-      // console.log(player.score);
+      player.buffCount++;
     }
-
-    // moveFatGurl(){
-    //     setInterval(()=>{
-    //    this.x+=this.direction;
-    //    console.log(this.x);
-    //   },500);
-
-
-
-    // }
 
     wallCollision(){
       const hitLeft = this.x-this.radius <= 0; //returns a true or false
-      // console.log(hitLeft); //would show true
       const hitRight = this.x + this.radius >= this.boardWidth;
       const hitTop = this.y - this.radius <=0;
       const hitBottom = this.y + this.radius >= this.boardHeight;
 
       if (hitLeft === true || hitRight === true){
         this.vx *= (-1);
-        // this.goal();
-        // if (hitLeft === true){
-        //   console.log('player 2 gets a point');}
-        //   if (hitRight === true){
-        //     console.log('player 1 gets a point')
-        //   }
-        }
-
-        
-        
-      
-
+       
       if (hitTop === true || hitBottom === true){
         this.vy *= (-1);
       }
     }
+  }
 
     reset() {
-   
       this.x = this.boardWidth / 2;
       this.y = this.boardHeight / 2;
 
@@ -77,7 +40,6 @@ export default class BuffBall {
         this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
-  
       paddleCollision(player1, player2) {
         if (this.vx > 0) {
           let paddle2=player2.coordinates(player2.x,player2.y, player2.width,player2.height); //returns an array
@@ -88,7 +50,7 @@ export default class BuffBall {
               (this.x+this.radius <=rightX) && 
               (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                // this.ping.play();
+                this.ping.play();
               } 
         } else {
           let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
@@ -98,7 +60,7 @@ export default class BuffBall {
              (this.x-this.radius >= leftX) && 
              (this.y >=topY && this.y <=bottomY)){
                 this.vx *= (-1);
-                // this.ping.play();
+                this.ping.play();
                 }
           }
         }
@@ -122,14 +84,13 @@ export default class BuffBall {
         const leftGoal = this.x-this.radius <=0;
 
       if (rightGoal){
-        this.goal(player1);
+        this.buffPlayer(player2);
         this.direction = -1;
+
       } else if (leftGoal){
-        this.goal(player2);
+        this.buffPlayer(player1);
         this.direction= 1;
       }
-    
-
     
     svg.appendChild(circle);
     }

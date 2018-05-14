@@ -39,7 +39,7 @@
 
 ## Game Features as per Author:
 **Good Balls & Bomb Balls**
-* Green ball: Let the green ball through to get a paddle buff!
+* Green ball(buff ball): Let the green ball through to get a paddle buff!
 
 * Red ball (bomb ball): If this ball hits your paddle it will make it smaller!
 

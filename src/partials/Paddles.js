@@ -8,11 +8,14 @@ constructor(boardHeight, width, height, x, y, up,down,player) {
       this.height = height;
       this.x = x;
       this.y = y;
-      this.speed = 20; //Move in increments of 10 pixels
+      this.speed = 10; //Move in increments of 10 pixels
       this.score = 0; //Default score = 0
 
       this.player=player;
       this.keyState={};
+
+      this.buffCount = 0;
+      this.debuffCount = 0;
 
       document.addEventListener('keydown',event => {
           this.keyState[event.key || event.which] = true;
@@ -21,18 +24,7 @@ constructor(boardHeight, width, height, x, y, up,down,player) {
       document.addEventListener('keyup',event => {
         this.keyState[event.key || event.which] = false;
     }, true);
-      
-
-    //   document.addEventListener('keydown', event => {
-    //     switch (event.key) {
-    //       case up:
-    //         this.up();
-    //         break;
-    //       case down:
-    //         this.down();
-    //         break;
-    //     }
-    // })
+    
 }
 
 
@@ -55,9 +47,6 @@ coordinates(x, y, width, height) {
     let bottomY = y + height;
     return [leftX, rightX, topY, bottomY];
   }
-
-
-            //...
 
     render(svg) {
         if(this.keyState['a'] && this.player === 'player1') {

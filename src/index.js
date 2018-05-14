@@ -46,6 +46,8 @@ document.addEventListener('keydown', event => {
             let realH1 = document.getElementById('realH1');
             console.log(realH1);
             realH1.style.display="block";
+            let textMessage = document.querySelector('.textMessage');
+            textMessage.style.display="block";
            (function gameLoop() {
                 game.render();
                 requestAnimationFrame(gameLoop);
