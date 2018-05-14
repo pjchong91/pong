@@ -67,7 +67,7 @@ export default class Game {
 	}
 
 
-
+//If either player gains a +10 point advantage, game provides set paddle height
 	sizePaddle(){ //A player
 
 		if (this.player1.score>=this.player2.score+10){
@@ -83,6 +83,7 @@ export default class Game {
 		}
 	}
 
+//Cumulatively check for buffs and debuffs
 	applyBuffandDebuff(){
 		this.player1.height = 56 + (5*this.player1.buffCount)-(5*this.player1.debuffCount);
 		this.player2.height = 56 + (5*this.player2.buffCount) - (5*this.player2.debuffCount);
@@ -94,44 +95,43 @@ export default class Game {
 			this.player2.height = 10
 
 		}
-
-		console.log(this.player2.debuffCount, this.player1.buffCount, this.player2.height, )
 	}
 	
 	render() {
 
+		//if pause
 		if (this.pause === true){
 			return;
 		}
 
+		//end game, player 1 victory
 		if (this.player1.score===20){
 			let gameBox = document.getElementById('game');
-			gameBox.style.display="none";
+			gameBox.style.display='none';
 			let victoryScreen = document.getElementById('victory')
-			victoryScreen.style.display="flex";
+			victoryScreen.style.display='flex';
 			let victoryAnnouncement = document.querySelector('.endGame p');
 			let textMessage = document.querySelector('.textMessage p')
-			textMessage.innerHTML = "Good game!"
-			victoryAnnouncement.innerHTML = "Victory to Player 1!!"
+			textMessage.innerHTML = 'Good game!'
+			victoryAnnouncement.innerHTML = 'Victory to Player 1!!'
 
 			return;
 		}
 		
+		//end game, player 2 victory
 		if (this.player2.score===20){
 			let gameBox = document.getElementById('game');
-			gameBox.style.display="none";
+			gameBox.style.display='none';
 			let victoryScreen = document.getElementById('victory')
-			victoryScreen.style.display="flex";
+			victoryScreen.style.display='flex';
 			let victoryAnnouncement = document.querySelector('.endGame p');
 			let textMessage = document.querySelector('.textMessage p')
-			textMessage.innerHTML = "Good game!"
-			victoryAnnouncement.innerHTML = "Victory to Player 2!!"
+			textMessage.innerHTML = 'Good game!'
+			victoryAnnouncement.innerHTML = 'Victory to Player 2!!'
 			return;
 		}
 
 		this.gameElement.innerHTML = '';
-
-		let textMessage = document.querySelector('.textMessage p') //Returns textMessage div-p
 
 		let svg = document.createElementNS(SVG_NS, 'svg');
 			svg.setAttributeNS(null, 'width', this.width);

@@ -1,3 +1,6 @@
+//Green ball will give paddle height increase to player that allows it to pass
+//Uses similar mechanics to ball.goal()
+
 import { SVG_NS } from '../settings';
 
 export default class BuffBall {
@@ -6,7 +9,7 @@ export default class BuffBall {
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
       this.direction = 1;//(-1) will reverse - multiply to get direction
-      this.ping = new Audio("public/sounds/pong-01.wav");
+      this.ping = new Audio('public/sounds/pong-01.wav');
       this.reset();
     }
 
@@ -80,6 +83,7 @@ export default class BuffBall {
         circle.setAttributeNS(null, 'fill', 'green');
         circle.setAttributeNS(null, 'cx', this.x);
         circle.setAttributeNS(null, 'cy', this.y);
+
 
         const rightGoal = this.x+this.radius >= this.boardWidth;
         const leftGoal = this.x-this.radius <=0;

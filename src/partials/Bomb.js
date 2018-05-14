@@ -1,3 +1,5 @@
+//On collision with player paddle, the debuff ball will cause paddle to shrink
+
 import { SVG_NS } from '../settings';
 
 export default class Bomb {
@@ -7,18 +9,14 @@ export default class Bomb {
       this.boardHeight = boardHeight;
       this.direction = 1;//(-1) will reverse - multiply to get direction
 
-      this.ping = new Audio("public/sounds/pong-01.wav");
+      this.ping = new Audio('public/sounds/pong-01.wav');
       this.reset();
-    
     }
-
 
     debuffPlayer(player) {
       this.reset();
       player.debuffCount++;
-
     }
-
 
     wallCollision(){
       const hitLeft = this.x-this.radius <= 0; //returns a true or false
@@ -45,8 +43,8 @@ export default class Bomb {
         this.vy = Math.floor(Math.random() * 10 - 5);}
         this.vx = this.direction * (6 - Math.abs(this.vy));
     }
-
   
+
       paddleCollision(player1, player2) {
         if (this.vx > 0) {
           let paddle2=player2.coordinates(player2.x,player2.y, player2.width,player2.height); //returns an array

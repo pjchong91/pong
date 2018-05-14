@@ -6,10 +6,9 @@ export default class Ball {
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
       this.direction = 1;//(-1) will reverse - multiply to get direction
-      this.ping = new Audio("public/sounds/pong-01.wav");
+      this.ping = new Audio('public/sounds/pong-01.wav');
       this.reset();
     }
-
 
     goal(player) {
       this.reset();
@@ -18,7 +17,6 @@ export default class Ball {
 
     wallCollision(){
       const hitLeft = this.x-this.radius <= 0; //returns a true or false
-      // console.log(hitLeft); //would show true
       const hitRight = this.x + this.radius >= this.boardWidth;
       const hitTop = this.y - this.radius <=0;
       const hitBottom = this.y + this.radius >= this.boardHeight;
@@ -33,7 +31,6 @@ export default class Ball {
     }
 
     reset() {
-   
       this.x = this.boardWidth / 2;
       this.y = this.boardHeight / 2;
 
@@ -43,33 +40,31 @@ export default class Ball {
         this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
-  
-      paddleCollision(player1, player2) {
-        if (this.vx > 0) {
-          let paddle2=player2.coordinates(player2.x,player2.y, player2.width,player2.height); //returns an array
-          let [leftX,rightX,topY,bottomY] = paddle2; //array destructuring
+    paddleCollision(player1, player2) {
+      if (this.vx > 0) {
+        let paddle2=player2.coordinates(player2.x,player2.y, player2.width,player2.height); //returns an array
+        let [leftX,rightX,topY,bottomY] = paddle2; //array destructuring
+      
+        //Right edge of ball is >= left edge of the paddle for Player2
+        if ((this.x+this.radius >= leftX) && 
+            (this.x+this.radius <=rightX) && 
+            (this.y >=topY && this.y <=bottomY)){
+              this.vx *= (-1);
+              this.ping.play();
+            } 
+      } else {
+        let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
+        let [leftX,rightX,topY,bottomY] = paddle1; //array destructuring
         
-          //Right edge of ball is >= left edge of the paddle for Player2
-          if ((this.x+this.radius >= leftX) && 
-              (this.x+this.radius <=rightX) && 
-              (this.y >=topY && this.y <=bottomY)){
-                this.vx *= (-1);
-                this.ping.play();
-              } 
-        } else {
-          let paddle1=player1.coordinates(player1.x,player1.y, player1.width,player1.height); //returns an array
-          let [leftX,rightX,topY,bottomY] = paddle1; //array destructuring
-          
-          if ((this.x-this.radius <= rightX) && 
-             (this.x-this.radius >= leftX) && 
-             (this.y >=topY && this.y <=bottomY)){
-                this.vx *= (-1);
-                this.ping.play();
-                }
-          }
+        if ((this.x-this.radius <= rightX) && 
+            (this.x-this.radius >= leftX) && 
+            (this.y >=topY && this.y <=bottomY)){
+              this.vx *= (-1);
+              this.ping.play();
+              }
         }
+      }
           
-
   render(svg, player1, player2) {
 
     this.x+= this.vx;
@@ -94,8 +89,6 @@ export default class Ball {
         this.goal(player2);
         this.direction= 1;
       }
-    
-
     
     svg.appendChild(circle);
     }

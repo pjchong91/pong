@@ -6,12 +6,9 @@ export default class Board {
       this.width = width;
       this.height = height;
 
-     
-      
     }
 
     render(svg) {//SVG is a variable from Game.js
-      //...
     let rect = document.createElementNS(SVG_NS, 'rect');
     rect.setAttributeNS(null, 'width', this.width);
     rect.setAttributeNS(null, 'height', this.height);
